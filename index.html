@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PDIY-Tech | Low cost embedded engineering</title>
+<title>PDIY-Tech ● Low Cost Embedded Engineering</title>
 <link rel="canonical" href="https://pdiytech.com/">
 <meta name="description" content="Full-stack embedded product development: firmware, PCB design, mechanical enclosure engineering and on-device GUI with LVGL and TouchGFX. From idea to production with a single team.">
 <meta property="og:type" content="website">
@@ -27,13 +27,13 @@
 </script>
 <style>
   :root {
-    --bg:#14130f; --bg-blur:rgba(20,19,15,0.86);
-    --band:oklch(0.17 0.006 85); --surface:oklch(0.195 0.006 85); --surface-2:oklch(0.215 0.006 85); --surface-hi:oklch(0.23 0.008 85);
-    --ink:oklch(0.95 0.006 90); --text:oklch(0.8 0.008 90); --muted:oklch(0.7 0.008 90);
-    --line:oklch(0.3 0.01 85); --line-strong:oklch(0.38 0.01 85); --grid:oklch(0.24 0.008 85);
-    --accent:oklch(0.78 0.13 72); --accent-hi:oklch(0.88 0.09 72); --accent-2:oklch(0.78 0.13 200);
-    --on-accent:#14130f; --ok:oklch(0.75 0.13 165); --accent-ink:oklch(0.78 0.13 72); --danger:oklch(0.72 0.17 27);
-    --field:oklch(0.17 0.006 85);
+    --bg:oklch(0.16 0.018 262); --bg-blur:oklch(0.16 0.018 262 / 0.86);
+    --band:oklch(0.185 0.02 262); --surface:oklch(0.21 0.022 262); --surface-2:oklch(0.232 0.023 262); --surface-hi:oklch(0.255 0.025 262);
+    --ink:oklch(0.96 0.008 250); --text:oklch(0.82 0.012 250); --muted:oklch(0.72 0.014 250);
+    --line:oklch(0.32 0.024 262); --line-strong:oklch(0.4 0.03 262); --grid:oklch(0.25 0.022 262);
+    --accent:oklch(0.50 0.20 259); --accent-hi:oklch(0.44 0.19 259); --accent-2:oklch(0.72 0.15 200);
+    --on-accent:oklch(0.99 0.01 259); --ok:oklch(0.75 0.13 165); --accent-ink:oklch(0.76 0.15 259); --danger:oklch(0.72 0.17 27);
+    --field:oklch(0.185 0.02 262);
     color-scheme: dark;
   }
   html[data-theme="light"] {
@@ -72,7 +72,8 @@
   .wrap { max-width: 1180px; margin: 0 auto; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-  @keyframes pdiy-marquee { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
+  /* tracks hold three copies of their content, so one cycle is a third of the width */
+  @keyframes pdiy-marquee3 { from { transform: translate3d(0,0,0); } to { transform: translate3d(-33.3333%,0,0); } }
 
   /* ---------- header ---------- */
   .site-header {
@@ -116,7 +117,7 @@
     html:not([data-theme="dark"]) .theme-knob .icon-sun { display: block; }
   }
 
-  .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; font-size: 15px; white-space: nowrap; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; font-size: 15px; white-space: nowrap; }
   .btn-accent { background: var(--accent); color: var(--on-accent); font-weight: 600; }
   .btn-accent:hover { background: var(--accent-hi); color: var(--on-accent); }
   .btn-outline { border: 1px solid var(--line-strong); color: var(--ink); font-weight: 500; }
@@ -185,9 +186,13 @@
   .proof-img { display: block; width: 100%; height: 190px; object-fit: cover; background: var(--surface-hi); }
 
   /* ---------- marquees ---------- */
-  .marquee { position: relative; overflow: hidden; }
-  .marquee-track { display: flex; align-items: center; width: max-content; animation: pdiy-marquee linear infinite; }
-  .marquee:hover .marquee-track, .marquee:focus-within .marquee-track { animation-play-state: paused; }
+  /* user-select off: without it a horizontal drag starts a native text selection,
+     which fires pointercancel and kills the drag on the first move */
+  .marquee { position: relative; overflow: hidden; cursor: grab; touch-action: pan-y; -webkit-user-select: none; user-select: none; }
+  .marquee.is-dragging { cursor: grabbing; }
+  .marquee-track { display: flex; align-items: center; width: max-content; animation: pdiy-marquee3 linear infinite; }
+  /* drag pauses the scroll; focus-within keeps keyboard users from chasing a moving link */
+  .marquee.is-dragging .marquee-track, .marquee:focus-within .marquee-track { animation-play-state: paused; }
   .fade-l, .fade-r { position: absolute; top: 0; bottom: 0; pointer-events: none; }
   .fade-l { left: 0; } .fade-r { right: 0; }
 
@@ -195,7 +200,9 @@
   .clients-inner { display: flex; align-items: center; gap: 24px; }
   .clients-label { flex-shrink: 0; font-size: 15px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-ink); white-space: nowrap; }
   .clients .marquee { flex: 1; min-width: 0; }
-  .clients .marquee-track { gap: 28px; animation-duration: 38s; }
+  /* margin, not gap: it must also sit after the last item so width == 3 x stride */
+  .clients .marquee-track { animation-duration: 38s; }
+  .clients .marquee-track .client-link, .clients .marquee-track .sep { margin-right: 28px; }
   .clients .fade-l, .clients .fade-r { width: 36px; }
   .clients .fade-l { background: linear-gradient(90deg, var(--band), transparent); }
   .clients .fade-r { background: linear-gradient(270deg, var(--band), transparent); }
@@ -225,7 +232,7 @@
   .skills-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 26px; }
   .skills-head h2 { margin: 0; font-size: clamp(24px,3vw,34px); line-height: 1.1; letter-spacing: -0.025em; font-weight: 700; }
   .skills-rows { display: flex; flex-direction: column; gap: 14px; margin: 0 clamp(-32px,-5vw,-18px); padding: 4px clamp(18px,5vw,32px) 0; }
-  .skills-rows .marquee-track { gap: 14px; }
+  .skills-rows .marquee-track .chip { margin-right: 14px; }
   .skills-rows .fade-l, .skills-rows .fade-r { width: 64px; }
   .skills-rows .fade-l { background: linear-gradient(90deg, var(--band), transparent); }
   .skills-rows .fade-r { background: linear-gradient(270deg, var(--band), transparent); }
@@ -233,8 +240,9 @@
   .row-2 .marquee-track { animation-duration: 132s; animation-direction: reverse; }
   .row-3 .marquee-track { animation-duration: 108s; }
   .chip {
-    flex-shrink: 0; padding: 9px 15px; border: 1px solid var(--line); border-radius: 99px;
-    font-size: 12.5px; color: var(--text); white-space: nowrap;
+    flex-shrink: 0; display: inline-flex; align-items: center; height: 38px; padding: 0 15px;
+    border: 1px solid var(--line); border-radius: 99px;
+    font-size: 12.5px; line-height: 1; color: var(--text); white-space: nowrap;
   }
 
   /* ---------- process ---------- */
@@ -255,7 +263,8 @@
 
   /* ---------- testimonials ---------- */
   .quotes { margin: 0 clamp(-32px,-5vw,-18px); padding: 0 clamp(18px,5vw,32px); }
-  .quotes .marquee-track { align-items: stretch; gap: 24px; animation-duration: 90s; }
+  .quotes .marquee-track { align-items: stretch; animation-duration: 90s; }
+  .quotes .marquee-track .quote { margin-right: 24px; }
   .quotes .fade-l, .quotes .fade-r { width: 60px; }
   .quotes .fade-l { background: linear-gradient(90deg, var(--bg), transparent); }
   .quotes .fade-r { background: linear-gradient(270deg, var(--bg), transparent); }
@@ -365,7 +374,7 @@
     <div>
       <div class="eyebrow mono">Low cost embedded engineering · Vietnam</div>
       <h1>Embedded device development teams</h1>
-      <p class="hero-lead">Full-stack embedded product development: Firmware/Software, PCB design, mechanical/enclosure engineering, and graphical user interfaces (GUI) built with LVGL and TouchGFX. We ship the idea to production with a single team.</p>
+      <p class="hero-lead">Full-stack embedded product development: Firmware/Software, PCB design, mechanical/enclosure engineering, and graphical user interfaces (GUI) built with LVGL and TouchGFX. We ship the idea to production with a single team and low cost</p>
       <div class="hero-cta">
         <a href="#contact" class="btn btn-accent btn-hero">Book a technical call</a>
         <a href="#work" class="btn btn-outline btn-hero">See the work</a>
@@ -413,6 +422,7 @@
   <div class="wrap clients-inner">
     <span class="clients-label mono">Trusted by</span>
     <div class="marquee">
+      <div class="marquee-drag">
       <div class="marquee-track">
         <a class="client-link mono" href="https://www.dreamingrobots.com/" target="_blank" rel="noopener">Dreaming Robots</a><span class="sep">/</span>
         <a class="client-link mono" href="https://www.airgradient.com/" target="_blank" rel="noopener">AirGradient</a><span class="sep">/</span>
@@ -429,7 +439,16 @@
           <a class="client-link mono" href="https://inergysystems.com/" target="_blank" rel="noopener" tabindex="-1">Inergy Systems</a><span class="sep">/</span>
           <a class="client-link mono" href="https://www.lonepeakoverland.com/" target="_blank" rel="noopener" tabindex="-1">Lone Peak Overland</a><span class="sep">/</span>
           <a class="client-link mono" href="https://seaair.com/" target="_blank" rel="noopener" tabindex="-1">Sea Air</a><span class="sep">/</span>
+        
+          <a class="client-link mono" href="https://www.dreamingrobots.com/" target="_blank" rel="noopener" tabindex="-1">Dreaming Robots</a><span class="sep">/</span>
+          <a class="client-link mono" href="https://www.airgradient.com/" target="_blank" rel="noopener" tabindex="-1">AirGradient</a><span class="sep">/</span>
+          <a class="client-link mono" href="https://www.friwo.com/" target="_blank" rel="noopener" tabindex="-1">FRIWO</a><span class="sep">/</span>
+          <a class="client-link mono" href="https://www.hqscales.com/" target="_blank" rel="noopener" tabindex="-1">HQ Scales</a><span class="sep">/</span>
+          <a class="client-link mono" href="https://inergysystems.com/" target="_blank" rel="noopener" tabindex="-1">Inergy Systems</a><span class="sep">/</span>
+          <a class="client-link mono" href="https://www.lonepeakoverland.com/" target="_blank" rel="noopener" tabindex="-1">Lone Peak Overland</a><span class="sep">/</span>
+          <a class="client-link mono" href="https://seaair.com/" target="_blank" rel="noopener" tabindex="-1">Sea Air</a><span class="sep">/</span>
         </span>
+      </div>
       </div>
       <div class="fade-l"></div><div class="fade-r"></div>
     </div>
@@ -486,6 +505,7 @@
     <div class="skills-head"><h2>Skills</h2></div>
     <div class="skills-rows">
       <div class="marquee row-1">
+        <div class="marquee-drag">
         <div class="marquee-track">
           <span class="chip mono">Embedded firmware &amp; software: C / C++</span>
           <span class="chip mono">Embedded GUI &amp; HMI: LVGL · TouchGFX · GUIx · custom UI</span>
@@ -498,11 +518,19 @@
             <span class="chip mono">Embedded web app: HTML · JavaScript · Bootstrap — lightweight &amp; secure</span>
             <span class="chip mono">Desktop apps: Windows · Linux (Python, C#) tuned to the firmware</span>
             <span class="chip mono">Mobile apps: Android · iOS (.NET MAUI) shipped to both stores</span>
+          
+            <span class="chip mono">Embedded firmware &amp; software: C / C++</span>
+            <span class="chip mono">Embedded GUI &amp; HMI: LVGL · TouchGFX · GUIx · custom UI</span>
+            <span class="chip mono">Embedded web app: HTML · JavaScript · Bootstrap — lightweight &amp; secure</span>
+            <span class="chip mono">Desktop apps: Windows · Linux (Python, C#) tuned to the firmware</span>
+            <span class="chip mono">Mobile apps: Android · iOS (.NET MAUI) shipped to both stores</span>
           </span>
+        </div>
         </div>
         <div class="fade-l"></div><div class="fade-r"></div>
       </div>
       <div class="marquee row-2">
+        <div class="marquee-drag">
         <div class="marquee-track">
           <span class="chip mono">IoT cloud: AWS IoT · Azure IoT · ThingsBoard</span>
           <span class="chip mono">Comms &amp; network: BLE · Wi-Fi · Ethernet · CAN · NFC · MODBUS · USB (WinUSB, WinCID, libusb) · Z-Wave</span>
@@ -515,11 +543,19 @@
             <span class="chip mono">RTOS: FreeRTOS · Zephyr · ThreadX (Azure RTOS)</span>
             <span class="chip mono">DFU: bootloader · secure boot · flash encryption · OTA</span>
             <span class="chip mono">Low power: long battery-life devices</span>
+          
+            <span class="chip mono">IoT cloud: AWS IoT · Azure IoT · ThingsBoard</span>
+            <span class="chip mono">Comms &amp; network: BLE · Wi-Fi · Ethernet · CAN · NFC · MODBUS · USB (WinUSB, WinCID, libusb) · Z-Wave</span>
+            <span class="chip mono">RTOS: FreeRTOS · Zephyr · ThreadX (Azure RTOS)</span>
+            <span class="chip mono">DFU: bootloader · secure boot · flash encryption · OTA</span>
+            <span class="chip mono">Low power: long battery-life devices</span>
           </span>
+        </div>
         </div>
         <div class="fade-l"></div><div class="fade-r"></div>
       </div>
       <div class="marquee row-3">
+        <div class="marquee-drag">
         <div class="marquee-track">
           <span class="chip mono">MCU / SoC / SiP: STM32 · EFR32BG · EFM32 · ZGM23 · SiWx917</span>
           <span class="chip mono">nRF52 · nRF53 · nRF54 · nRF91 · ESP32 · PIC · AVR · ATSAM · Ambiq Apollo</span>
@@ -530,7 +566,13 @@
             <span class="chip mono">nRF52 · nRF53 · nRF54 · nRF91 · ESP32 · PIC · AVR · ATSAM · Ambiq Apollo</span>
             <span class="chip mono">Frameworks &amp; SDKs: STM32Cube · nRF5 SDK · nRF Connect SDK</span>
             <span class="chip mono">ESP-IDF · Simplicity SDK (Silabs)</span>
+          
+            <span class="chip mono">MCU / SoC / SiP: STM32 · EFR32BG · EFM32 · ZGM23 · SiWx917</span>
+            <span class="chip mono">nRF52 · nRF53 · nRF54 · nRF91 · ESP32 · PIC · AVR · ATSAM · Ambiq Apollo</span>
+            <span class="chip mono">Frameworks &amp; SDKs: STM32Cube · nRF5 SDK · nRF Connect SDK</span>
+            <span class="chip mono">ESP-IDF · Simplicity SDK (Silabs)</span>
           </span>
+        </div>
         </div>
         <div class="fade-l"></div><div class="fade-r"></div>
       </div>
@@ -546,7 +588,7 @@
       <div class="step">
         <div class="step-num mono">STEP 01</div>
         <h3>Requirement input</h3>
-        <p>Share your idea or requirement for your project. We analyse it and advise.</p>
+        <p>Share your idea or requirement, and we will review it with you and advise on the best approach.</p>
       </div>
       <div class="step">
         <div class="step-num mono">STEP 02</div>
@@ -604,6 +646,7 @@
   <div class="wrap">
     <h2 class="sec-title" style="max-width:18ch">What our clients say</h2>
     <div class="marquee quotes">
+      <div class="marquee-drag">
       <div class="marquee-track">
         <figure class="quote">
           <p>“The software he developed for our product was well-architected and is maintainable after delivery. He consistently hit deadlines and has the technical depth for embedded systems to resolve items on his own based on schematics and testing.”</p>
@@ -670,7 +713,41 @@
             <p>“Put real thought into how to address the problem well before winning the contract, and made himself available to support our needs.”</p>
             <figcaption><div class="quote-name">Malcolm Wild</div><div class="quote-org mono">UK</div></figcaption>
           </figure>
+        
+          <figure class="quote">
+            <p>“The software he developed for our product was well-architected and is maintainable after delivery. He consistently hit deadlines and has the technical depth for embedded systems to resolve items on his own based on schematics and testing.”</p>
+            <figcaption><div class="quote-name">David Weston</div><div class="quote-org mono">Inergy Systems LLC · US</div></figcaption>
+          </figure>
+          <figure class="quote">
+            <p>“He solved the many issues which came up during our development iterations, even though he was not responsible for them. Very efficient, with a result-driven mentality.”</p>
+            <figcaption><div class="quote-name">Lorenzo Querci</div><div class="quote-org mono">IoT project · Italy</div></figcaption>
+          </figure>
+          <figure class="quote">
+            <p>“Completely rewrote our Arduino-based firmware in a very professional way and added a lot of new features. Highly recommended freelancer.”</p>
+            <figcaption><div class="quote-name">Achim Haug</div><div class="quote-org mono">AirGradient · Thailand</div></figcaption>
+          </figure>
+          <figure class="quote">
+            <p>“He delivered exactly what was promised. He is extremely knowledgeable about USB and I would definitely hire him again for a similar project.”</p>
+            <figcaption><div class="quote-name">Matt Lee</div><div class="quote-org mono">US</div></figcaption>
+          </figure>
+          <figure class="quote">
+            <p>“Very professional, timely, and extremely talented. Hoping to work with him in the future. Highly recommend.”</p>
+            <figcaption><div class="quote-name">Flavio Toscano</div><div class="quote-org mono">Brazil</div></figcaption>
+          </figure>
+          <figure class="quote">
+            <p>“Outstanding work, very knowledgeable and professional. I had a great experience. I highly recommend them for future work.”</p>
+            <figcaption><div class="quote-name">Kevin Coates</div><div class="quote-org mono">UK</div></figcaption>
+          </figure>
+          <figure class="quote">
+            <p>“Quick and efficient, and provided a rapid solution with really good follow-up support. Highly recommended.”</p>
+            <figcaption><div class="quote-name">Toby Hart</div><div class="quote-org mono">UK</div></figcaption>
+          </figure>
+          <figure class="quote">
+            <p>“Put real thought into how to address the problem well before winning the contract, and made himself available to support our needs.”</p>
+            <figcaption><div class="quote-name">Malcolm Wild</div><div class="quote-org mono">UK</div></figcaption>
+          </figure>
         </span>
+      </div>
       </div>
       <div class="fade-l"></div><div class="fade-r"></div>
     </div>
@@ -718,7 +795,7 @@
   <div class="wrap footer-inner mono">
     <div class="footer-brand">
       <span class="footer-name">PDIY-Tech</span>
-      <div><a href="mailto:contact@pdiytech.com">contact@pdiytech.com</a></div>
+      <div><a href="mailto:phat@pdiytech.com">phat@pdiytech.com</a></div>
       <div><a href="tel:+84979321926">WhatsApp +84 979 321 926</a></div>
       <div>Truong Quang Trong, Quang Ngai, Vietnam</div>
       <div class="footer-reg">Reg. No 34A8023244 · © 2026 PDIY-Tech</div>
@@ -776,6 +853,65 @@
   if (typeof matchMedia === 'function') {
     matchMedia('(max-width: 760px)').addEventListener('change', function () { setMenu(false); });
   }
+
+  /* ---------- draggable marquees ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll('.marquee'), function (rail) {
+    var drag = rail.querySelector('.marquee-drag');
+    var track = rail.querySelector('.marquee-track');
+    if (!drag || !track) return;
+
+    var THRESHOLD = 6; // px of travel before this counts as a drag rather than a click
+    var startX = 0, baseX = 0, x = 0, third = 0, pressed = false, captured = false, moved = 0;
+
+    rail.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      pressed = true;
+      captured = false;
+      moved = 0;
+      startX = e.clientX;
+      baseX = x;
+      // one copy of the content; dragging wraps within it so the rail never runs out
+      third = track.scrollWidth / 3;
+      // deliberately no setPointerCapture here: capturing on press retargets the
+      // click to the rail, which would stop links inside the marquee from opening
+    });
+
+    rail.addEventListener('pointermove', function (e) {
+      if (!pressed) return;
+      var dx = e.clientX - startX;
+      if (Math.abs(dx) > moved) moved = Math.abs(dx);
+      if (!captured) {
+        if (moved <= THRESHOLD) return; // still a potential click; leave it alone
+        captured = true;
+        rail.classList.add('is-dragging');
+        try { rail.setPointerCapture(e.pointerId); } catch (err) {}
+      }
+      x = baseX + dx;
+      if (third > 0) x = ((x % third) + third) % third - third;
+      drag.style.transform = 'translateX(' + x + 'px)';
+    });
+
+    function endDrag(e) {
+      if (!pressed) return;
+      pressed = false;
+      rail.classList.remove('is-dragging');
+      if (captured && e && e.pointerId != null && rail.hasPointerCapture(e.pointerId)) {
+        rail.releasePointerCapture(e.pointerId);
+      }
+      captured = false;
+    }
+    rail.addEventListener('pointerup', endDrag);
+    rail.addEventListener('pointercancel', endDrag);
+
+    // a native link drag would fire pointercancel and kill ours; block just that,
+    // rather than preventDefault on pointerdown, which would also swallow the click
+    rail.addEventListener('dragstart', function (e) { e.preventDefault(); });
+
+    // a drag that happens to finish on a link must not navigate
+    rail.addEventListener('click', function (e) {
+      if (moved > THRESHOLD) { e.preventDefault(); e.stopPropagation(); }
+    }, true);
+  });
 
   /* ---------- contact form ---------- */
   var form = document.getElementById('contact-form');
