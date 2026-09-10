@@ -70,6 +70,10 @@
   img { max-width: 100%; }
   .mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
   .wrap { max-width: 1180px; margin: 0 auto; }
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+  }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   /* tracks hold three copies of their content, so one cycle is a third of the width */
@@ -292,21 +296,20 @@
   .contact-links a { display: inline-flex; align-items: center; gap: 9px; }
   .contact-links svg { flex-shrink: 0; }
 
-  .form-card { border: 1px solid var(--line); border-radius: 6px; padding: 28px; background: var(--surface-2); display: flex; flex-direction: column; gap: 16px; height: 100%; }
-  .field { display: flex; flex-direction: column; gap: 7px; }
-  .field-grow { flex: 1; min-height: 0; }
-  .field label { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-  .field input, .field textarea {
-    width: 100%; padding: 11px 13px; border-radius: 4px; border: 1px solid var(--line-strong);
-    background: var(--field); color: var(--ink); font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif;
-    font-size: 15px; outline: none;
+  .booking-card {
+    display: flex; flex-direction: column; justify-content: center;
+    border: 1px solid var(--line); border-radius: 6px; padding: 36px 32px;
+    background: var(--surface-2); height: 100%;
   }
-  .field input:focus, .field textarea:focus { border-color: var(--accent); }
-  .field textarea { min-height: 120px; height: 100%; resize: vertical; }
-  .field input::placeholder, .field textarea::placeholder { color: var(--muted); }
-  .form-submit { margin-top: 4px; padding: 14px 20px; border: none; font-family: inherit; cursor: pointer; }
-  .form-hint { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12.5px; text-align: center; min-height: 17px; color: var(--muted); }
-  .form-hint.is-error { color: var(--danger); }
+  .booking-card h3 { margin: 14px 0 0; font-size: clamp(22px,2.4vw,28px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 700; }
+  .booking-card p { margin: 14px 0 0; font-size: 15.5px; line-height: 1.6; color: var(--text); text-wrap: pretty; }
+  .booking-cta { margin-top: 26px; padding: 15px 26px; gap: 9px; align-self: flex-start; }
+  .booking-cta svg { flex-shrink: 0; }
+  .booking-alt { font-size: 13.5px; color: var(--muted); }
+  @media (max-width: 760px) {
+    .booking-card { padding: 28px 22px; }
+    .booking-cta { align-self: stretch; }
+  }
 
   /* ---------- footer ---------- */
   .site-footer { padding: clamp(32px,6vw,44px) clamp(18px,5vw,32px); background: var(--bg); }
@@ -763,29 +766,26 @@
       <div class="contact-name">Phat Nguyen</div>
       <div class="contact-role">Founder, PDIY-Tech</div>
       <p>We have worked with embedded devices and on-device UI daily — ESP32, nRF, STM32, LVGL and TouchGFX.</p>
-      <p>Messages from this form land directly in my inbox. I read and answer them, usually within one business day.</p>
+      <p>Pick a time that suits you and it books straight into my calendar — you'll get a confirmation by email, usually the same day.</p>
       <div class="contact-links mono">
         <a href="https://www.linkedin.com/in/phatnt/" target="_blank" rel="noopener">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.36 4.26 5.44v6.3zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zm1.78 13.02H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"></path></svg>Connect with me on LinkedIn</a>
       </div>
     </div>
 
-    <form class="form-card" id="contact-form" novalidate>
-      <div class="field">
-        <label for="f-name">Name</label>
-        <input type="text" id="f-name" name="name" placeholder="Your name" autocomplete="name">
-      </div>
-      <div class="field">
-        <label for="f-email">Email</label>
-        <input type="email" id="f-email" name="email" placeholder="you@company.com" autocomplete="email">
-      </div>
-      <div class="field field-grow">
-        <label for="f-message">What do you want to build?</label>
-        <textarea id="f-message" name="message" rows="4" placeholder="Product, target silicon, where you are today"></textarea>
-      </div>
-      <button type="submit" class="btn btn-accent form-submit">Book a technical call</button>
-      <div class="form-hint mono" id="form-hint" role="status" aria-live="polite">We reply within one business day</div>
-    </form>
+    <div class="booking-card">
+      <span class="eyebrow mono">Schedule</span>
+      <h3>Book a technical call</h3>
+      <p>Choose a time in my calendar and we'll talk through your product, the target silicon and where you are today.</p>
+      <a class="btn btn-accent booking-cta"
+         href="https://outlook.office.com/book/bookingmeeting@pdiytech.com/?ismsaljsauthenabled"
+         target="_blank" rel="noopener">
+        Book a technical call
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"></path><path d="M20 4 11 13"></path><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg>
+        <span class="visually-hidden">(opens in a new tab)</span>
+      </a>
+      <p class="booking-alt">Prefer email? <a href="mailto:phat@pdiytech.com">phat@pdiytech.com</a></p>
+    </div>
   </div>
 </section>
 
@@ -913,42 +913,6 @@
     }, true);
   });
 
-  /* ---------- contact form ---------- */
-  var form = document.getElementById('contact-form');
-  var hint = document.getElementById('form-hint');
-  var fName = document.getElementById('f-name');
-  var fEmail = document.getElementById('f-email');
-  var fMessage = document.getElementById('f-message');
-  var DEFAULT_HINT = 'We reply within one business day';
-
-  function setHint(text, isError) {
-    hint.textContent = text;
-    hint.classList.toggle('is-error', !!isError);
-  }
-
-  [fName, fEmail, fMessage].forEach(function (el) {
-    el.addEventListener('input', function () {
-      if (hint.textContent !== DEFAULT_HINT) setHint(DEFAULT_HINT, false);
-    });
-  });
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var name = fName.value.trim();
-    var email = fEmail.value.trim();
-    var message = fMessage.value.trim();
-    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
-
-    if (!name) { setHint('Please enter your name', true); fName.focus(); return; }
-    if (!emailOk) { setHint('Please enter a valid email address', true); fEmail.focus(); return; }
-    if (!message) { setHint('Please tell me what you want to build', true); fMessage.focus(); return; }
-
-    var subject = 'Technical call request — ' + name;
-    var body = message + '\n\n— ' + name + ' (' + email + ')';
-    window.location.href = 'mailto:contact@pdiytech.com?subject=' +
-      encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-    setHint('Thanks — I will reply within one business day.', false);
-  });
 })();
 </script>
 </body>
