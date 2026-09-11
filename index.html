@@ -90,7 +90,10 @@
   .brand-text { display: flex; flex-direction: column; gap: 1px; }
   .brand-name { font-weight: 700; font-size: 20px; letter-spacing: -0.01em; line-height: 1.1; }
   .brand-tag { font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
-  .nav-desktop { display: flex; flex-wrap: wrap; gap: 28px; font-size: 14px; }
+  .nav-desktop {
+    display: flex; flex-wrap: nowrap; gap: clamp(14px,2.2vw,28px);
+    font-size: 14px; white-space: nowrap; min-width: 0;
+  }
   .nav-desktop a { color: var(--text); font-weight: 700; }
   .nav-desktop a:hover { color: var(--ink); }
   .header-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
@@ -145,13 +148,13 @@
   .menu-panel a:last-of-type { border-bottom: none; }
   .menu-panel .btn { min-height: 48px; margin-top: 12px; font-size: 15px; border-bottom: none; }
 
-  /* desktop / mobile split mirrors the design's 760px matchMedia breakpoint */
+  /* desktop / mobile split mirrors the design's 940px matchMedia breakpoint */
   .only-mobile { display: none; }
-  @media (max-width: 760px) {
+  @media (max-width: 940px) {
     .only-desktop { display: none; }
     .only-mobile { display: flex; }
   }
-  @media (min-width: 761px) { .menu-panel { display: none; } }
+  @media (min-width: 941px) { .menu-panel { display: none; } }
   /* the nowrap tagline sets a floor the header cannot shrink past; drop it on small phones */
   @media (max-width: 460px) {
     .brand-tag { display: none; }
@@ -204,8 +207,11 @@
 
   .clients { padding: clamp(14px,3vw,20px) clamp(18px,5vw,32px); border-bottom: 1px solid var(--line); background: var(--band); overflow: hidden; }
   .clients-inner { display: flex; align-items: center; gap: 24px; }
+  @media (max-width: 940px) {
+    .clients-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
+  }
   .clients-label { flex-shrink: 0; font-size: 15px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-ink); white-space: nowrap; }
-  .clients .marquee { flex: 1; min-width: 0; }
+  .clients .marquee { flex: 1; align-self: stretch; min-width: 0; width: 100%; }
   /* margin, not gap: it must also sit after the last item so width == 3 x stride */
   .clients .marquee-track { animation-duration: 38s; }
   .clients .marquee-track .client-link, .clients .marquee-track .sep { margin-right: 28px; }
@@ -875,7 +881,7 @@
   menuBtn.addEventListener('click', function () { setMenu(menuPanel.hidden); });
   menuPanel.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
   if (typeof matchMedia === 'function') {
-    matchMedia('(max-width: 760px)').addEventListener('change', function () { setMenu(false); });
+    matchMedia('(max-width: 940px)').addEventListener('change', function () { setMenu(false); });
   }
 
   /* ---------- draggable marquees ---------- */
