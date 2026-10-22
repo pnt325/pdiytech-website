@@ -17,7 +17,7 @@
 <link rel="apple-touch-icon" href="assets/img/landing/pdiytech-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
   /* Apply the stored theme before first paint so the page never flashes the wrong palette. */
   try {
@@ -62,13 +62,12 @@
   * { box-sizing: border-box; }
   body {
     margin: 0; background: var(--bg); color: var(--ink);
-    font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
     overflow-x: hidden; -webkit-font-smoothing: antialiased;
   }
   a { color: var(--accent-ink); text-decoration: none; }
   a:hover { color: var(--accent); }
   img { max-width: 100%; }
-  .mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
   .wrap { max-width: 1180px; margin: 0 auto; }
   .visually-hidden {
     position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
@@ -228,7 +227,10 @@
   .sec-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px; margin-bottom: 44px; }
   .sec-head h2, .section > .wrap > h2 { margin: 0; font-size: clamp(28px,3.4vw,40px); line-height: 1.1; letter-spacing: -0.025em; font-weight: 700; text-wrap: balance; }
   .sec-head .eyebrow { display: block; margin-bottom: 14px; }
-  .sec-head h2 { max-width: 26ch; }
+  /* the intro paragraph beside it is gone, so the heading block owns the row */
+  .sec-head > div { flex: 1 1 100%; min-width: 0; }
+  /* later than the shared rule above, so this wins over its text-wrap: balance */
+  .sec-head h2 { text-wrap: pretty; }
   .sec-title { margin: 0 0 44px !important; }
 
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%,300px), 1fr)); gap: 16px; }
@@ -320,7 +322,7 @@
   }
   .booking-card .booking-note svg { flex-shrink: 0; margin-top: 2px; color: var(--accent-ink); }
   .booking-card .booking-alt {
-    margin: 0; font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif;
+    margin: 0; font-family: 'Open Sans', Helvetica, Arial, sans-serif;
     font-size: 15px; color: var(--muted);
   }
   @media (max-width: 760px) {
@@ -332,7 +334,7 @@
   .site-footer { padding: clamp(32px,6vw,44px) clamp(18px,5vw,32px); background: var(--bg); }
   .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; font-size: 13px; color: var(--muted); }
   .footer-brand { line-height: 1.9; }
-  .footer-name { color: var(--ink); font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block; }
+  .footer-name { color: var(--ink); font-family: 'Open Sans', Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block; }
   .footer-reg { margin-top: 10px; }
   .footer-contact { display: inline-flex; align-items: center; gap: 8px; }
   .footer-contact svg { flex-shrink: 0; }
@@ -353,7 +355,7 @@
       <img src="assets/img/landing/pdiytech-logo.png" alt="" width="40" height="40">
       <div class="brand-text">
         <span class="brand-name">PDIY-Tech</span>
-        <span class="brand-tag mono">IoT solutions and edge devices</span>
+        <span class="brand-tag">IoT solutions and edge devices</span>
       </div>
     </div>
 
@@ -392,7 +394,7 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow mono">Low cost embedded engineering</div>
+      <div class="eyebrow">Low cost embedded engineering</div>
       <h1>Embedded product development team.</h1>
       <p class="hero-lead">We are full-stack embedded product development engineering: Firmware, software, PCB design, mechanical/enclosure and GUI, HMI built with LVGL, TouchGFX. We are shipping the idea to production with a single team and low cost.</p>
       <div class="hero-cta">
@@ -402,37 +404,37 @@
     </div>
 
     <div class="proof-card">
-      <div class="proof-head mono">
+      <div class="proof-head">
         <a href="https://www.upwork.com/freelancers/phatnt" target="_blank" rel="noopener">Upwork Top Rated Plus</a>
         <span class="proof-status"><span class="status-dot" aria-hidden="true"></span>available</span>
       </div>
       <div class="stats">
         <div class="stat">
           <div class="stat-num" style="color:var(--accent-ink)">100%</div>
-          <div class="stat-label mono">Upwork job success</div>
+          <div class="stat-label">Upwork job success</div>
         </div>
         <div class="stat">
           <div class="stat-num">4.9</div>
-          <div class="stat-label mono">average of 37 reviews</div>
+          <div class="stat-label">average of 37 reviews</div>
         </div>
         <div class="stat">
           <div class="stat-num">50+</div>
-          <div class="stat-label mono">Projects completed</div>
+          <div class="stat-label">Projects completed</div>
         </div>
         <div class="stat">
           <div class="stat-num">7,400+</div>
-          <div class="stat-label mono">hours tracked</div>
+          <div class="stat-label">hours tracked</div>
         </div>
         <div class="stat">
           <div class="stat-num">9+</div>
-          <div class="stat-label mono">years shipping</div>
+          <div class="stat-label">years shipping</div>
         </div>
         <div class="stat">
           <div class="stat-num">7</div>
-          <div class="stat-label mono">named OEM clients</div>
+          <div class="stat-label">named OEM clients</div>
         </div>
       </div>
-      <div class="proof-note mono">Verified Sept 2026</div>
+      <div class="proof-note">Verified Sept 2026</div>
       <img class="proof-img" src="assets/img/landing/hero-bench.jpg" alt="Custom PCB on the bench under probes with a logic analyser and J-Link attached" width="560" height="190">
     </div>
   </div>
@@ -440,33 +442,33 @@
 
 <section class="clients">
   <div class="wrap clients-inner">
-    <span class="clients-label mono">Trusted by</span>
+    <span class="clients-label">Trusted by</span>
     <div class="marquee">
       <div class="marquee-drag">
       <div class="marquee-track">
-        <a class="client-link mono" href="https://www.dreamingrobots.com/" target="_blank" rel="noopener">Dreaming Robots</a><span class="sep">/</span>
-        <a class="client-link mono" href="https://www.airgradient.com/" target="_blank" rel="noopener">AirGradient</a><span class="sep">/</span>
-        <a class="client-link mono" href="https://www.friwo.com/" target="_blank" rel="noopener">FRIWO</a><span class="sep">/</span>
-        <a class="client-link mono" href="https://www.hqscales.com/" target="_blank" rel="noopener">HQ Scales</a><span class="sep">/</span>
-        <a class="client-link mono" href="https://inergysystems.com/" target="_blank" rel="noopener">Inergy Systems</a><span class="sep">/</span>
-        <a class="client-link mono" href="https://www.lonepeakoverland.com/" target="_blank" rel="noopener">Lone Peak Overland</a><span class="sep">/</span>
-        <a class="client-link mono" href="https://seaair.com/" target="_blank" rel="noopener">Sea Air</a><span class="sep">/</span>
+        <a class="client-link" href="https://www.dreamingrobots.com/" target="_blank" rel="noopener">Dreaming Robots</a><span class="sep">/</span>
+        <a class="client-link" href="https://www.airgradient.com/" target="_blank" rel="noopener">AirGradient</a><span class="sep">/</span>
+        <a class="client-link" href="https://www.friwo.com/" target="_blank" rel="noopener">FRIWO</a><span class="sep">/</span>
+        <a class="client-link" href="https://www.hqscales.com/" target="_blank" rel="noopener">HQ Scales</a><span class="sep">/</span>
+        <a class="client-link" href="https://inergysystems.com/" target="_blank" rel="noopener">Inergy Systems</a><span class="sep">/</span>
+        <a class="client-link" href="https://www.lonepeakoverland.com/" target="_blank" rel="noopener">Lone Peak Overland</a><span class="sep">/</span>
+        <a class="client-link" href="https://seaair.com/" target="_blank" rel="noopener">Sea Air</a><span class="sep">/</span>
         <span aria-hidden="true" style="display:contents">
-          <a class="client-link mono" href="https://www.dreamingrobots.com/" target="_blank" rel="noopener" tabindex="-1">Dreaming Robots</a><span class="sep">/</span>
-          <a class="client-link mono" href="https://www.airgradient.com/" target="_blank" rel="noopener" tabindex="-1">AirGradient</a><span class="sep">/</span>
-          <a class="client-link mono" href="https://www.friwo.com/" target="_blank" rel="noopener" tabindex="-1">FRIWO</a><span class="sep">/</span>
-          <a class="client-link mono" href="https://www.hqscales.com/" target="_blank" rel="noopener" tabindex="-1">HQ Scales</a><span class="sep">/</span>
-          <a class="client-link mono" href="https://inergysystems.com/" target="_blank" rel="noopener" tabindex="-1">Inergy Systems</a><span class="sep">/</span>
-          <a class="client-link mono" href="https://www.lonepeakoverland.com/" target="_blank" rel="noopener" tabindex="-1">Lone Peak Overland</a><span class="sep">/</span>
-          <a class="client-link mono" href="https://seaair.com/" target="_blank" rel="noopener" tabindex="-1">Sea Air</a><span class="sep">/</span>
+          <a class="client-link" href="https://www.dreamingrobots.com/" target="_blank" rel="noopener" tabindex="-1">Dreaming Robots</a><span class="sep">/</span>
+          <a class="client-link" href="https://www.airgradient.com/" target="_blank" rel="noopener" tabindex="-1">AirGradient</a><span class="sep">/</span>
+          <a class="client-link" href="https://www.friwo.com/" target="_blank" rel="noopener" tabindex="-1">FRIWO</a><span class="sep">/</span>
+          <a class="client-link" href="https://www.hqscales.com/" target="_blank" rel="noopener" tabindex="-1">HQ Scales</a><span class="sep">/</span>
+          <a class="client-link" href="https://inergysystems.com/" target="_blank" rel="noopener" tabindex="-1">Inergy Systems</a><span class="sep">/</span>
+          <a class="client-link" href="https://www.lonepeakoverland.com/" target="_blank" rel="noopener" tabindex="-1">Lone Peak Overland</a><span class="sep">/</span>
+          <a class="client-link" href="https://seaair.com/" target="_blank" rel="noopener" tabindex="-1">Sea Air</a><span class="sep">/</span>
         
-          <a class="client-link mono" href="https://www.dreamingrobots.com/" target="_blank" rel="noopener" tabindex="-1">Dreaming Robots</a><span class="sep">/</span>
-          <a class="client-link mono" href="https://www.airgradient.com/" target="_blank" rel="noopener" tabindex="-1">AirGradient</a><span class="sep">/</span>
-          <a class="client-link mono" href="https://www.friwo.com/" target="_blank" rel="noopener" tabindex="-1">FRIWO</a><span class="sep">/</span>
-          <a class="client-link mono" href="https://www.hqscales.com/" target="_blank" rel="noopener" tabindex="-1">HQ Scales</a><span class="sep">/</span>
-          <a class="client-link mono" href="https://inergysystems.com/" target="_blank" rel="noopener" tabindex="-1">Inergy Systems</a><span class="sep">/</span>
-          <a class="client-link mono" href="https://www.lonepeakoverland.com/" target="_blank" rel="noopener" tabindex="-1">Lone Peak Overland</a><span class="sep">/</span>
-          <a class="client-link mono" href="https://seaair.com/" target="_blank" rel="noopener" tabindex="-1">Sea Air</a><span class="sep">/</span>
+          <a class="client-link" href="https://www.dreamingrobots.com/" target="_blank" rel="noopener" tabindex="-1">Dreaming Robots</a><span class="sep">/</span>
+          <a class="client-link" href="https://www.airgradient.com/" target="_blank" rel="noopener" tabindex="-1">AirGradient</a><span class="sep">/</span>
+          <a class="client-link" href="https://www.friwo.com/" target="_blank" rel="noopener" tabindex="-1">FRIWO</a><span class="sep">/</span>
+          <a class="client-link" href="https://www.hqscales.com/" target="_blank" rel="noopener" tabindex="-1">HQ Scales</a><span class="sep">/</span>
+          <a class="client-link" href="https://inergysystems.com/" target="_blank" rel="noopener" tabindex="-1">Inergy Systems</a><span class="sep">/</span>
+          <a class="client-link" href="https://www.lonepeakoverland.com/" target="_blank" rel="noopener" tabindex="-1">Lone Peak Overland</a><span class="sep">/</span>
+          <a class="client-link" href="https://seaair.com/" target="_blank" rel="noopener" tabindex="-1">Sea Air</a><span class="sep">/</span>
         </span>
       </div>
       </div>
@@ -479,41 +481,41 @@
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <span class="eyebrow mono">Services</span>
+        <span class="eyebrow">Services</span>
         <h2>Single team for multiple solutions</h2>
       </div>
     </div>
 
     <div class="cards">
       <div class="card">
-        <div class="card-num mono">/ 01</div>
+        <div class="card-num">/ 01</div>
         <h3>Firmware</h3>
         <p>Embedded for any MCU, wireless SoC. Low-level using C/C++ and high performance with lightweight memory usage.</p>
-        <div class="card-tags mono">Bare-metal · RTOS · Drivers · OTA · Secure Boot</div>
+        <div class="card-tags">Bare-metal · RTOS · Drivers · OTA · Secure Boot</div>
       </div>
       <div class="card">
-        <div class="card-num mono">/ 02</div>
+        <div class="card-num">/ 02</div>
         <h3>Hardware &amp; PCB</h3>
         <p>PCB layout and schematic capture has multiple layer, DFM andbn EMC/EMI certificate for consumer, industrial and IoT products.</p>
-        <div class="card-tags mono">Schematic · Layout · DFM · EMC/EMI</div>
+        <div class="card-tags">Schematic · Layout · DFM · EMC/EMI</div>
       </div>
       <div class="card">
-        <div class="card-num mono">/ 03</div>
+        <div class="card-num">/ 03</div>
         <h3>Embedded GUI &amp; HMI</h3>
         <p>The UI build with LVGL, TouchGFX with smooth rendering, less CPU usage. Modem UI with dynamic layout, multiple language and font style support.</p>
-        <div class="card-tags mono">LVGL · TouchGFX · GUIx</div>
+        <div class="card-tags">LVGL · TouchGFX · GUIx</div>
       </div>
       <div class="card">
-        <div class="card-num mono">/ 04</div>
+        <div class="card-num">/ 04</div>
         <h3>Software</h3>
         <p>The software can work on cross platform: Android, iOS, Windows, Linux and webapp. And easy to sync and work with our device firmware that has optimize the communication protocol.</p>
-        <div class="card-tags mono">Android · iOS · Windows · Linux · WebApp · IoT cloud</div>
+        <div class="card-tags">Android · iOS · Windows · Linux · WebApp · IoT cloud</div>
       </div>
       <div class="card">
-        <div class="card-num mono">/ 05</div>
+        <div class="card-num">/ 05</div>
         <h3>Production support</h3>
         <p>Automation test software(ATS), JIG test and flashing scripts that can integrated with existed system.</p>
-        <div class="card-tags mono">ATS · JIG · Programming · Self-Test</div>
+        <div class="card-tags">ATS · JIG · Programming · Self-Test</div>
       </div>
     </div>
   </div>
@@ -526,23 +528,23 @@
       <div class="marquee row-1">
         <div class="marquee-drag">
         <div class="marquee-track">
-          <span class="chip mono">Embedded firmware &amp; software: C / C++</span>
-          <span class="chip mono">Embedded GUI &amp; HMI: LVGL · TouchGFX · GUIx · custom UI</span>
-          <span class="chip mono">Embedded web app: HTML · JavaScript · Bootstrap — lightweight &amp; secure</span>
-          <span class="chip mono">Desktop apps: Windows · Linux (Python, C#) tuned to the firmware</span>
-          <span class="chip mono">Mobile apps: Android · iOS (.NET MAUI) shipped to both stores</span>
+          <span class="chip">Embedded firmware &amp; software: C / C++</span>
+          <span class="chip">Embedded GUI &amp; HMI: LVGL · TouchGFX · GUIx · custom UI</span>
+          <span class="chip">Embedded web app: HTML · JavaScript · Bootstrap — lightweight &amp; secure</span>
+          <span class="chip">Desktop apps: Windows · Linux (Python, C#) tuned to the firmware</span>
+          <span class="chip">Mobile apps: Android · iOS (.NET MAUI) shipped to both stores</span>
           <span aria-hidden="true" style="display:contents">
-            <span class="chip mono">Embedded firmware &amp; software: C / C++</span>
-            <span class="chip mono">Embedded GUI &amp; HMI: LVGL · TouchGFX · GUIx · custom UI</span>
-            <span class="chip mono">Embedded web app: HTML · JavaScript · Bootstrap — lightweight &amp; secure</span>
-            <span class="chip mono">Desktop apps: Windows · Linux (Python, C#) tuned to the firmware</span>
-            <span class="chip mono">Mobile apps: Android · iOS (.NET MAUI) shipped to both stores</span>
+            <span class="chip">Embedded firmware &amp; software: C / C++</span>
+            <span class="chip">Embedded GUI &amp; HMI: LVGL · TouchGFX · GUIx · custom UI</span>
+            <span class="chip">Embedded web app: HTML · JavaScript · Bootstrap — lightweight &amp; secure</span>
+            <span class="chip">Desktop apps: Windows · Linux (Python, C#) tuned to the firmware</span>
+            <span class="chip">Mobile apps: Android · iOS (.NET MAUI) shipped to both stores</span>
           
-            <span class="chip mono">Embedded firmware &amp; software: C / C++</span>
-            <span class="chip mono">Embedded GUI &amp; HMI: LVGL · TouchGFX · GUIx · custom UI</span>
-            <span class="chip mono">Embedded web app: HTML · JavaScript · Bootstrap — lightweight &amp; secure</span>
-            <span class="chip mono">Desktop apps: Windows · Linux (Python, C#) tuned to the firmware</span>
-            <span class="chip mono">Mobile apps: Android · iOS (.NET MAUI) shipped to both stores</span>
+            <span class="chip">Embedded firmware &amp; software: C / C++</span>
+            <span class="chip">Embedded GUI &amp; HMI: LVGL · TouchGFX · GUIx · custom UI</span>
+            <span class="chip">Embedded web app: HTML · JavaScript · Bootstrap — lightweight &amp; secure</span>
+            <span class="chip">Desktop apps: Windows · Linux (Python, C#) tuned to the firmware</span>
+            <span class="chip">Mobile apps: Android · iOS (.NET MAUI) shipped to both stores</span>
           </span>
         </div>
         </div>
@@ -551,23 +553,23 @@
       <div class="marquee row-2">
         <div class="marquee-drag">
         <div class="marquee-track">
-          <span class="chip mono">IoT cloud: AWS IoT · Azure IoT · ThingsBoard</span>
-          <span class="chip mono">Comms &amp; network: BLE · Wi-Fi · Ethernet · CAN · NFC · MODBUS · USB (WinUSB, WinCID, libusb) · Z-Wave</span>
-          <span class="chip mono">RTOS: FreeRTOS · Zephyr · ThreadX (Azure RTOS)</span>
-          <span class="chip mono">DFU: bootloader · secure boot · flash encryption · OTA</span>
-          <span class="chip mono">Low power: long battery-life devices</span>
+          <span class="chip">IoT cloud: AWS IoT · Azure IoT · ThingsBoard</span>
+          <span class="chip">Comms &amp; network: BLE · Wi-Fi · Ethernet · CAN · NFC · MODBUS · USB (WinUSB, WinCID, libusb) · Z-Wave</span>
+          <span class="chip">RTOS: FreeRTOS · Zephyr · ThreadX (Azure RTOS)</span>
+          <span class="chip">DFU: bootloader · secure boot · flash encryption · OTA</span>
+          <span class="chip">Low power: long battery-life devices</span>
           <span aria-hidden="true" style="display:contents">
-            <span class="chip mono">IoT cloud: AWS IoT · Azure IoT · ThingsBoard</span>
-            <span class="chip mono">Comms &amp; network: BLE · Wi-Fi · Ethernet · CAN · NFC · MODBUS · USB (WinUSB, WinCID, libusb) · Z-Wave</span>
-            <span class="chip mono">RTOS: FreeRTOS · Zephyr · ThreadX (Azure RTOS)</span>
-            <span class="chip mono">DFU: bootloader · secure boot · flash encryption · OTA</span>
-            <span class="chip mono">Low power: long battery-life devices</span>
+            <span class="chip">IoT cloud: AWS IoT · Azure IoT · ThingsBoard</span>
+            <span class="chip">Comms &amp; network: BLE · Wi-Fi · Ethernet · CAN · NFC · MODBUS · USB (WinUSB, WinCID, libusb) · Z-Wave</span>
+            <span class="chip">RTOS: FreeRTOS · Zephyr · ThreadX (Azure RTOS)</span>
+            <span class="chip">DFU: bootloader · secure boot · flash encryption · OTA</span>
+            <span class="chip">Low power: long battery-life devices</span>
           
-            <span class="chip mono">IoT cloud: AWS IoT · Azure IoT · ThingsBoard</span>
-            <span class="chip mono">Comms &amp; network: BLE · Wi-Fi · Ethernet · CAN · NFC · MODBUS · USB (WinUSB, WinCID, libusb) · Z-Wave</span>
-            <span class="chip mono">RTOS: FreeRTOS · Zephyr · ThreadX (Azure RTOS)</span>
-            <span class="chip mono">DFU: bootloader · secure boot · flash encryption · OTA</span>
-            <span class="chip mono">Low power: long battery-life devices</span>
+            <span class="chip">IoT cloud: AWS IoT · Azure IoT · ThingsBoard</span>
+            <span class="chip">Comms &amp; network: BLE · Wi-Fi · Ethernet · CAN · NFC · MODBUS · USB (WinUSB, WinCID, libusb) · Z-Wave</span>
+            <span class="chip">RTOS: FreeRTOS · Zephyr · ThreadX (Azure RTOS)</span>
+            <span class="chip">DFU: bootloader · secure boot · flash encryption · OTA</span>
+            <span class="chip">Low power: long battery-life devices</span>
           </span>
         </div>
         </div>
@@ -576,20 +578,20 @@
       <div class="marquee row-3">
         <div class="marquee-drag">
         <div class="marquee-track">
-          <span class="chip mono">MCU / SoC / SiP: STM32 · EFR32BG · EFM32 · ZGM23 · SiWx917</span>
-          <span class="chip mono">nRF52 · nRF53 · nRF54 · nRF91 · ESP32 · PIC · AVR · ATSAM · Ambiq Apollo</span>
-          <span class="chip mono">Frameworks &amp; SDKs: STM32Cube · nRF5 SDK · nRF Connect SDK</span>
-          <span class="chip mono">ESP-IDF · Simplicity SDK (Silabs)</span>
+          <span class="chip">MCU / SoC / SiP: STM32 · EFR32BG · EFM32 · ZGM23 · SiWx917</span>
+          <span class="chip">nRF52 · nRF53 · nRF54 · nRF91 · ESP32 · PIC · AVR · ATSAM · Ambiq Apollo</span>
+          <span class="chip">Frameworks &amp; SDKs: STM32Cube · nRF5 SDK · nRF Connect SDK</span>
+          <span class="chip">ESP-IDF · Simplicity SDK (Silabs)</span>
           <span aria-hidden="true" style="display:contents">
-            <span class="chip mono">MCU / SoC / SiP: STM32 · EFR32BG · EFM32 · ZGM23 · SiWx917</span>
-            <span class="chip mono">nRF52 · nRF53 · nRF54 · nRF91 · ESP32 · PIC · AVR · ATSAM · Ambiq Apollo</span>
-            <span class="chip mono">Frameworks &amp; SDKs: STM32Cube · nRF5 SDK · nRF Connect SDK</span>
-            <span class="chip mono">ESP-IDF · Simplicity SDK (Silabs)</span>
+            <span class="chip">MCU / SoC / SiP: STM32 · EFR32BG · EFM32 · ZGM23 · SiWx917</span>
+            <span class="chip">nRF52 · nRF53 · nRF54 · nRF91 · ESP32 · PIC · AVR · ATSAM · Ambiq Apollo</span>
+            <span class="chip">Frameworks &amp; SDKs: STM32Cube · nRF5 SDK · nRF Connect SDK</span>
+            <span class="chip">ESP-IDF · Simplicity SDK (Silabs)</span>
           
-            <span class="chip mono">MCU / SoC / SiP: STM32 · EFR32BG · EFM32 · ZGM23 · SiWx917</span>
-            <span class="chip mono">nRF52 · nRF53 · nRF54 · nRF91 · ESP32 · PIC · AVR · ATSAM · Ambiq Apollo</span>
-            <span class="chip mono">Frameworks &amp; SDKs: STM32Cube · nRF5 SDK · nRF Connect SDK</span>
-            <span class="chip mono">ESP-IDF · Simplicity SDK (Silabs)</span>
+            <span class="chip">MCU / SoC / SiP: STM32 · EFR32BG · EFM32 · ZGM23 · SiWx917</span>
+            <span class="chip">nRF52 · nRF53 · nRF54 · nRF91 · ESP32 · PIC · AVR · ATSAM · Ambiq Apollo</span>
+            <span class="chip">Frameworks &amp; SDKs: STM32Cube · nRF5 SDK · nRF Connect SDK</span>
+            <span class="chip">ESP-IDF · Simplicity SDK (Silabs)</span>
           </span>
         </div>
         </div>
@@ -601,13 +603,13 @@
 
 <section class="section section-band" id="work">
   <div class="wrap">
-    <span class="eyebrow mono" style="display:block;margin-bottom:14px">Portfolio</span>
+    <span class="eyebrow" style="display:block;margin-bottom:14px">Portfolio</span>
     <h2 class="sec-title">Discover why customers choose PDIY-Tech</h2>
     <div class="work-grid">
       <div class="work-card">
         <img src="assets/img/landing/case-air.png" alt="AirGradient air-quality monitor on a desk showing CO2, PM2.5 and temperature" width="380" height="200" style="object-position:center 40%">
         <div class="work-body">
-          <div class="work-tag mono">ESP32 · WI-FI · OTA</div>
+          <div class="work-tag">ESP32 · WI-FI · OTA</div>
           <h3>Air-quality monitor</h3>
           <p>Firmware, OTA pipeline and calibration flow for an open-hardware monitor shipping worldwide.</p>
         </div>
@@ -615,7 +617,7 @@
       <div class="work-card">
         <img src="assets/img/landing/case-energy.png" alt="Energy system test bench: Silicon Labs radio board, Raspberry Pi gateway and the custom control board wired together" width="380" height="200">
         <div class="work-body">
-          <div class="work-tag mono">ESP32 · BLE · WEBAPP · Z-WAVE</div>
+          <div class="work-tag">ESP32 · BLE · WEBAPP · Z-WAVE</div>
           <h3>Energy meter system</h3>
           <p>Energy-meter firmware on ESP32-S3 and ZGM230 with Wi-Fi, BLE and Z-Wave, 12 metering channels via ADE9078 and MCP3914, and Azure IoT Hub. Embedded web server for setup, with OTA over BLE, HTTP, USB and browser.</p>
         </div>
@@ -623,7 +625,7 @@
       <div class="work-card">
         <img src="assets/img/landing/case-hmi.jpg" alt="Handheld HVAC controller running an on-device touch UI" width="380" height="200">
         <div class="work-body">
-          <div class="work-tag mono">LVGL · TOUCH HMI · BLE</div>
+          <div class="work-tag">LVGL · TOUCH HMI · BLE</div>
           <h3>HVAC controller</h3>
           <p>On-device touch interface, control firmware and the automated rig that verifies every unit off the line.</p>
         </div>
@@ -640,108 +642,108 @@
       <div class="marquee-track">
         <figure class="quote">
           <p>“The software he developed for our product was well-architected and is maintainable after delivery. He consistently hit deadlines and has the technical depth for embedded systems to resolve items on his own based on schematics and testing.”</p>
-          <figcaption><div class="quote-name">David Weston</div><div class="quote-org mono">Inergy Systems LLC · US</div></figcaption>
+          <figcaption><div class="quote-name">David Weston</div><div class="quote-org">Inergy Systems LLC · US</div></figcaption>
         </figure>
         <figure class="quote">
           <p>“He solved the many issues which came up during our development iterations, even though he was not responsible for them. Very efficient, with a result-driven mentality.”</p>
-          <figcaption><div class="quote-name">Lorenzo Querci</div><div class="quote-org mono">IoT project · Italy</div></figcaption>
+          <figcaption><div class="quote-name">Lorenzo Querci</div><div class="quote-org">IoT project · Italy</div></figcaption>
         </figure>
         <figure class="quote">
           <p>“Completely rewrote our Arduino-based firmware in a very professional way and added a lot of new features. Highly recommended freelancer.”</p>
-          <figcaption><div class="quote-name">Achim Haug</div><div class="quote-org mono">AirGradient · Thailand</div></figcaption>
+          <figcaption><div class="quote-name">Achim Haug</div><div class="quote-org">AirGradient · Thailand</div></figcaption>
         </figure>
         <figure class="quote">
           <p>“He delivered exactly what was promised. He is extremely knowledgeable about USB and I would definitely hire him again for a similar project.”</p>
-          <figcaption><div class="quote-name">Matt Lee</div><div class="quote-org mono">US</div></figcaption>
+          <figcaption><div class="quote-name">Matt Lee</div><div class="quote-org">US</div></figcaption>
         </figure>
         <figure class="quote">
           <p>“Very professional, timely, and extremely talented. Hoping to work with him in the future. Highly recommend.”</p>
-          <figcaption><div class="quote-name">Flavio Toscano</div><div class="quote-org mono">Brazil</div></figcaption>
+          <figcaption><div class="quote-name">Flavio Toscano</div><div class="quote-org">Brazil</div></figcaption>
         </figure>
         <figure class="quote">
           <p>“Outstanding work, very knowledgeable and professional. I had a great experience. I highly recommend them for future work.”</p>
-          <figcaption><div class="quote-name">Kevin Coates</div><div class="quote-org mono">UK</div></figcaption>
+          <figcaption><div class="quote-name">Kevin Coates</div><div class="quote-org">UK</div></figcaption>
         </figure>
         <figure class="quote">
           <p>“Quick and efficient, and provided a rapid solution with really good follow-up support. Highly recommended.”</p>
-          <figcaption><div class="quote-name">Toby Hart</div><div class="quote-org mono">UK</div></figcaption>
+          <figcaption><div class="quote-name">Toby Hart</div><div class="quote-org">UK</div></figcaption>
         </figure>
         <figure class="quote">
           <p>“Put real thought into how to address the problem well before winning the contract, and made himself available to support our needs.”</p>
-          <figcaption><div class="quote-name">Malcolm Wild</div><div class="quote-org mono">UK</div></figcaption>
+          <figcaption><div class="quote-name">Malcolm Wild</div><div class="quote-org">UK</div></figcaption>
         </figure>
         <span aria-hidden="true" style="display:contents">
           <figure class="quote">
             <p>“The software he developed for our product was well-architected and is maintainable after delivery. He consistently hit deadlines and has the technical depth for embedded systems to resolve items on his own based on schematics and testing.”</p>
-            <figcaption><div class="quote-name">David Weston</div><div class="quote-org mono">Inergy Systems LLC · US</div></figcaption>
+            <figcaption><div class="quote-name">David Weston</div><div class="quote-org">Inergy Systems LLC · US</div></figcaption>
           </figure>
           <figure class="quote">
             <p>“He solved the many issues which came up during our development iterations, even though he was not responsible for them. Very efficient, with a result-driven mentality.”</p>
-            <figcaption><div class="quote-name">Lorenzo Querci</div><div class="quote-org mono">IoT project · Italy</div></figcaption>
+            <figcaption><div class="quote-name">Lorenzo Querci</div><div class="quote-org">IoT project · Italy</div></figcaption>
           </figure>
           <figure class="quote">
             <p>“Completely rewrote our Arduino-based firmware in a very professional way and added a lot of new features. Highly recommended freelancer.”</p>
-            <figcaption><div class="quote-name">Achim Haug</div><div class="quote-org mono">AirGradient · Thailand</div></figcaption>
+            <figcaption><div class="quote-name">Achim Haug</div><div class="quote-org">AirGradient · Thailand</div></figcaption>
           </figure>
           <figure class="quote">
             <p>“He delivered exactly what was promised. He is extremely knowledgeable about USB and I would definitely hire him again for a similar project.”</p>
-            <figcaption><div class="quote-name">Matt Lee</div><div class="quote-org mono">US</div></figcaption>
+            <figcaption><div class="quote-name">Matt Lee</div><div class="quote-org">US</div></figcaption>
           </figure>
           <figure class="quote">
             <p>“Very professional, timely, and extremely talented. Hoping to work with him in the future. Highly recommend.”</p>
-            <figcaption><div class="quote-name">Flavio Toscano</div><div class="quote-org mono">Brazil</div></figcaption>
+            <figcaption><div class="quote-name">Flavio Toscano</div><div class="quote-org">Brazil</div></figcaption>
           </figure>
           <figure class="quote">
             <p>“Outstanding work, very knowledgeable and professional. I had a great experience. I highly recommend them for future work.”</p>
-            <figcaption><div class="quote-name">Kevin Coates</div><div class="quote-org mono">UK</div></figcaption>
+            <figcaption><div class="quote-name">Kevin Coates</div><div class="quote-org">UK</div></figcaption>
           </figure>
           <figure class="quote">
             <p>“Quick and efficient, and provided a rapid solution with really good follow-up support. Highly recommended.”</p>
-            <figcaption><div class="quote-name">Toby Hart</div><div class="quote-org mono">UK</div></figcaption>
+            <figcaption><div class="quote-name">Toby Hart</div><div class="quote-org">UK</div></figcaption>
           </figure>
           <figure class="quote">
             <p>“Put real thought into how to address the problem well before winning the contract, and made himself available to support our needs.”</p>
-            <figcaption><div class="quote-name">Malcolm Wild</div><div class="quote-org mono">UK</div></figcaption>
+            <figcaption><div class="quote-name">Malcolm Wild</div><div class="quote-org">UK</div></figcaption>
           </figure>
         
           <figure class="quote">
             <p>“The software he developed for our product was well-architected and is maintainable after delivery. He consistently hit deadlines and has the technical depth for embedded systems to resolve items on his own based on schematics and testing.”</p>
-            <figcaption><div class="quote-name">David Weston</div><div class="quote-org mono">Inergy Systems LLC · US</div></figcaption>
+            <figcaption><div class="quote-name">David Weston</div><div class="quote-org">Inergy Systems LLC · US</div></figcaption>
           </figure>
           <figure class="quote">
             <p>“He solved the many issues which came up during our development iterations, even though he was not responsible for them. Very efficient, with a result-driven mentality.”</p>
-            <figcaption><div class="quote-name">Lorenzo Querci</div><div class="quote-org mono">IoT project · Italy</div></figcaption>
+            <figcaption><div class="quote-name">Lorenzo Querci</div><div class="quote-org">IoT project · Italy</div></figcaption>
           </figure>
           <figure class="quote">
             <p>“Completely rewrote our Arduino-based firmware in a very professional way and added a lot of new features. Highly recommended freelancer.”</p>
-            <figcaption><div class="quote-name">Achim Haug</div><div class="quote-org mono">AirGradient · Thailand</div></figcaption>
+            <figcaption><div class="quote-name">Achim Haug</div><div class="quote-org">AirGradient · Thailand</div></figcaption>
           </figure>
           <figure class="quote">
             <p>“He delivered exactly what was promised. He is extremely knowledgeable about USB and I would definitely hire him again for a similar project.”</p>
-            <figcaption><div class="quote-name">Matt Lee</div><div class="quote-org mono">US</div></figcaption>
+            <figcaption><div class="quote-name">Matt Lee</div><div class="quote-org">US</div></figcaption>
           </figure>
           <figure class="quote">
             <p>“Very professional, timely, and extremely talented. Hoping to work with him in the future. Highly recommend.”</p>
-            <figcaption><div class="quote-name">Flavio Toscano</div><div class="quote-org mono">Brazil</div></figcaption>
+            <figcaption><div class="quote-name">Flavio Toscano</div><div class="quote-org">Brazil</div></figcaption>
           </figure>
           <figure class="quote">
             <p>“Outstanding work, very knowledgeable and professional. I had a great experience. I highly recommend them for future work.”</p>
-            <figcaption><div class="quote-name">Kevin Coates</div><div class="quote-org mono">UK</div></figcaption>
+            <figcaption><div class="quote-name">Kevin Coates</div><div class="quote-org">UK</div></figcaption>
           </figure>
           <figure class="quote">
             <p>“Quick and efficient, and provided a rapid solution with really good follow-up support. Highly recommended.”</p>
-            <figcaption><div class="quote-name">Toby Hart</div><div class="quote-org mono">UK</div></figcaption>
+            <figcaption><div class="quote-name">Toby Hart</div><div class="quote-org">UK</div></figcaption>
           </figure>
           <figure class="quote">
             <p>“Put real thought into how to address the problem well before winning the contract, and made himself available to support our needs.”</p>
-            <figcaption><div class="quote-name">Malcolm Wild</div><div class="quote-org mono">UK</div></figcaption>
+            <figcaption><div class="quote-name">Malcolm Wild</div><div class="quote-org">UK</div></figcaption>
           </figure>
         </span>
       </div>
       </div>
       <div class="fade-l"></div><div class="fade-r"></div>
     </div>
-    <div class="quotes-note mono">Verified reviews from <a href="https://www.upwork.com/freelancers/phatnt" target="_blank" rel="noopener">Upwork</a></div>
+    <div class="quotes-note">Verified reviews from <a href="https://www.upwork.com/freelancers/phatnt" target="_blank" rel="noopener">Upwork</a></div>
   </div>
 </section>
 
@@ -753,14 +755,14 @@
       <div class="contact-name">Phat Nguyen</div>
       <div class="contact-role">Founder, PDIY-Tech</div>
       <p>We have worked with embedded device and GUI daily with ESP32, nRF52-53-91, STM32, LVGL and TouchGFX.</p>
-      <div class="contact-links mono">
+      <div class="contact-links">
         <a href="https://www.linkedin.com/in/phatnt/" target="_blank" rel="noopener">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.36 4.26 5.44v6.3zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zm1.78 13.02H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"></path></svg>Connect me on LinkedIn</a>
       </div>
     </div>
 
     <div class="booking-card">
-      <span class="eyebrow mono">Schedule</span>
+      <span class="eyebrow">Schedule</span>
       <h3>Booking the meeting</h3>
       <p>Choose a time in my calendar and we'll talk through your product.</p>
       <p class="booking-note">
@@ -782,7 +784,7 @@
 </main>
 
 <footer class="site-footer">
-  <div class="wrap footer-inner mono">
+  <div class="wrap footer-inner">
     <div class="footer-brand">
       <span class="footer-name">PDIY-Tech</span>
       <div><a class="footer-contact" href="mailto:phat@pdiytech.com"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"></rect><path d="M3 6.5l9 6.5 9-6.5"></path></svg>phat@pdiytech.com</a></div>
